@@ -1,0 +1,14 @@
+# 密钥只留在本机，不要提交
+.env
+.env.*
+!.env.example
+
+# 模板文件和预览图不进 Git
+*.pptx
+*.ppt
+uploads/
+tmp/
+previews/
+
+# 系统杂文件
+.DS_Store
