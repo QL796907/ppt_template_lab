@@ -15,16 +15,11 @@
 
 ## 第 1 步：Cloudflare R2
 
-- 状态：还没完成。脚本在仓库里，但没有连上你的私有桶。
+- 状态：已完成
 - 做了什么：
-  - 新增 `scripts/r2-check.ts`。它会上传 `healthcheck/ping.txt`，再列出这个文件，然后不带密钥去下载，确认被拒绝。
-  - 运行命令：`npm run r2:check`
-  - 没配密钥时脚本会停下来，并列出缺哪些变量。用假地址试了一次，上传失败并退出，没有误报成功。
-- 没通过的原因：这台机器没有 Cloudflare 账号，也没有 `.env`。建不了私有桶，真实上传也跑不了。不能把这一步当成做完。
-- 待你做：在 Cloudflare 建一个私有 R2 桶和读写令牌，把下面 5 个值填进 `.env`（不要提交）：
-  - `R2_ACCOUNT_ID`
-  - `R2_ACCESS_KEY_ID`
-  - `R2_SECRET_ACCESS_KEY`
-  - `R2_BUCKET`
-  - `R2_ENDPOINT`（一般是 `https://账号ID.r2.cloudflarestorage.com`）
-- 下一步：密钥到位后重新跑 `npm run r2:check`。看到「第 1 步连通检查通过」才算完成，然后再做第 2 步。
+  - 私有桶 `ppt-template`（公开访问保持禁用）
+  - `npm run r2:check` 上传了 `healthcheck/ping.txt`，列表里能看到它
+  - 不带密钥下载被拒绝（HTTP 400），桶仍然是私有的
+  - 密钥只在本机 `.env`，没有提交
+- 待你确认：要不要做第 2 步（Supabase）。需要你有 Supabase 账号。
+- 下一步：第 2 步。建 `templates` 表，插入一行假数据再查出来。

@@ -4,10 +4,10 @@
 
 ## 当前状态
 
-- 第 0 步已完成。第 1 步只写了 `scripts/r2-check.ts`，连通验收还没过：这台机器没有 Cloudflare R2 密钥，不能假装桶已建好。
+- 第 0 步、第 1 步已完成。私有 R2 桶 `ppt-template` 已连通，密钥只在本机 `.env`。
 - 还没有网站页面，也没有 Android 工程。
 - 还没有发过版，所以还没有面向用户的 `README.md`。第一次发版时再写，并附带 Windows 安装包。
-- 下一步以 `PROGRESS.md` 为准：等 R2 密钥到位并跑通 `npm run r2:check` 之后，才能做第 2 步。不要跳步。
+- 下一步以 `PROGRESS.md` 为准：等用户确认后再做第 2 步（Supabase）。不要跳步。
 
 ## 交付
 
