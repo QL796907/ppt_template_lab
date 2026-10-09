@@ -1,0 +1,11 @@
+{
+  "name": "ppt-template-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "r2:check": "node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/r2-check.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1148.0"
+  }
+}

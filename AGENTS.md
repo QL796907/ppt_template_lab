@@ -4,10 +4,10 @@
 
 ## 当前状态
 
-- 第 0 步已完成：公开仓库、目录骨架（`apps/web/`、`scripts/`、`docs/`）、`.gitignore`、`.env.example`、`CURSOR_BUILD_GUIDE.md`、`PROGRESS.md`。网站和脚本还是空目录。
-- 还没有产品代码，也没有 Android 工程。
+- 第 0 步已完成。第 1 步只写了 `scripts/r2-check.ts`，连通验收还没过：这台机器没有 Cloudflare R2 密钥，不能假装桶已建好。
+- 还没有网站页面，也没有 Android 工程。
 - 还没有发过版，所以还没有面向用户的 `README.md`。第一次发版时再写，并附带 Windows 安装包。
-- 下一步以 `PROGRESS.md` 为准：等用户确认后再做第 1 步（Cloudflare R2）。不要跳步。
+- 下一步以 `PROGRESS.md` 为准：等 R2 密钥到位并跑通 `npm run r2:check` 之后，才能做第 2 步。不要跳步。
 
 ## 交付
 
