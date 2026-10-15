@@ -2,7 +2,6 @@ import { readFileSync } from "node:fs";
 import { ListObjectsV2Command, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 const REQUIRED = [
-  "R2_ACCOUNT_ID",
   "R2_ACCESS_KEY_ID",
   "R2_SECRET_ACCESS_KEY",
   "R2_BUCKET",
@@ -73,13 +72,9 @@ if (!names.includes(key)) {
 console.log("列表里能看到：");
 for (const name of names) console.log(`  - ${name}`);
 
-const anonymous = await fetch(`${endpoint}/${bucket}/${key}`);
-if (anonymous.ok) {
-  console.error("这个桶现在像是公开的：不带密钥也能下载。请在 Cloudflare 里关掉公开访问。");
-  process.exit(1);
-}
-console.log(`不带密钥下载被拒绝（HTTP ${anonymous.status}）。桶仍然是私有的。`);
-console.log("第 1 步连通检查通过。");
+// S3 API 主机始终要 SigV4。公开访问走 r2.dev 或自定义域名，
+// 对 endpoint 发不签名的 GET 无论桶是否公开都会失败，不能当私有证明。
+console.log("第 1 步连通检查通过：密钥能上传，列表里也能看到这个文件。");
 
 function loadEnvFile(path: string) {
   let text = "";
