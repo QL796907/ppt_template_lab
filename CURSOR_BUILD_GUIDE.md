@@ -60,7 +60,7 @@
 
 - 创建私有 bucket
 - 创建 API Token（读写该 bucket）
-- 本地 `.env` 写入：`R2_ACCOUNT_ID`、`R2_ACCESS_KEY_ID`、`R2_SECRET_ACCESS_KEY`、`R2_BUCKET`、`R2_ENDPOINT`
+- 本地 `.env` 写入：`R2_ACCESS_KEY_ID`、`R2_SECRET_ACCESS_KEY`、`R2_BUCKET`、`R2_ENDPOINT`
 - 写一个最小脚本：上传一个测试 txt，再列出对象，证明连通
 - **验收**：脚本成功；bucket 保持私有
 
