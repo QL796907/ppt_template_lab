@@ -1,4 +1,3 @@
-import { readFileSync } from "node:fs";
 import { ListObjectsV2Command, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 const REQUIRED = [
@@ -7,8 +6,6 @@ const REQUIRED = [
   "R2_BUCKET",
   "R2_ENDPOINT",
 ] as const;
-
-loadEnvFile(".env");
 
 const missing = REQUIRED.filter((key) => !process.env[key]?.trim());
 if (missing.length > 0) {
@@ -75,27 +72,3 @@ for (const name of names) console.log(`  - ${name}`);
 // S3 API 主机始终要 SigV4。公开访问走 r2.dev 或自定义域名，
 // 对 endpoint 发不签名的 GET 无论桶是否公开都会失败，不能当私有证明。
 console.log("第 1 步连通检查通过：密钥能上传，列表里也能看到这个文件。");
-
-function loadEnvFile(path: string) {
-  let text = "";
-  try {
-    text = readFileSync(path, "utf8");
-  } catch {
-    return;
-  }
-  for (const line of text.split("\n")) {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith("#")) continue;
-    const eq = trimmed.indexOf("=");
-    if (eq === -1) continue;
-    const name = trimmed.slice(0, eq).trim();
-    let value = trimmed.slice(eq + 1).trim();
-    if (
-      (value.startsWith('"') && value.endsWith('"')) ||
-      (value.startsWith("'") && value.endsWith("'"))
-    ) {
-      value = value.slice(1, -1);
-    }
-    if (!process.env[name]) process.env[name] = value;
-  }
-}
