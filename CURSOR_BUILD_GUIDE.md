@@ -44,7 +44,6 @@
 
 ```
 /
-  README.md
   CURSOR_BUILD_GUIDE.md   # 本文件
   PROGRESS.md
   .env.example
