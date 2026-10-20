@@ -4,10 +4,10 @@
 
 ## 当前状态
 
-- 第 0 步、第 1 步已完成。R2 桶 `ppt-template` 的密钥能上传并列出对象，密钥只在本机 `.env`。
+- 第 0 步到第 2 步已完成。R2 桶 `ppt-template` 能上传；Supabase 表 `templates` 能写入并读回。密钥只在本机 `.env`。
 - 还没有网站页面，也没有 Android 工程。
 - 还没有发过版，所以还没有面向用户的 `README.md`。第一次发版时再写，并附带 Windows 安装包。
-- 下一步以 `PROGRESS.md` 为准：等用户确认后再做第 2 步（Supabase）。不要跳步。
+- 下一步以 `PROGRESS.md` 为准：等用户确认后再做第 3 步（签名下载）。不要跳步。
 - CI（`.github/workflows/ci.yml`）在 pull request 和推送到 `main` 时跑：`npm ci`，再用 Node 检查 `scripts/` 里 TypeScript 的语法。不跑 `r2:check`，也不读 `.env`。
 
 ## 交付
