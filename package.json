@@ -5,9 +5,12 @@
   "scripts": {
     "ci": "find scripts -name '*.ts' -print0 | xargs -0 -r -n1 node --disable-warning=ExperimentalWarning --experimental-strip-types --check",
     "r2:check": "node --disable-warning=ExperimentalWarning --experimental-strip-types --env-file-if-exists=.env scripts/r2-check.ts",
-    "supabase:check": "node --disable-warning=ExperimentalWarning --experimental-strip-types --env-file-if-exists=.env scripts/supabase-check.ts"
+    "supabase:check": "node --disable-warning=ExperimentalWarning --experimental-strip-types --env-file-if-exists=.env scripts/supabase-check.ts",
+    "download:server": "node --disable-warning=ExperimentalWarning --experimental-strip-types --env-file-if-exists=.env scripts/download-server.ts",
+    "download:check": "node --disable-warning=ExperimentalWarning --experimental-strip-types --env-file-if-exists=.env scripts/download-check.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1148.0"
+    "@aws-sdk/client-s3": "^3.1148.0",
+    "@aws-sdk/s3-request-presigner": "^3.1153.0"
   }
 }
