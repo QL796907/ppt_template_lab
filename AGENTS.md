@@ -4,11 +4,12 @@
 
 ## 当前状态
 
-- 第 0 步到第 4 步已完成。列表页在 `apps/web`，`npm run web` 打开。预览和下载都走 120 秒签名链接。密钥只在本机 `.env`。
-- 还没有 Android 工程。入库脚本是第 5 步。
+- 第 0 步到第 5 步已完成。`npm run ingest` 把本地 `.pptx` 的第一页做成预览，上传到 R2 并写入 `templates`。必须带 `--source-note`。密钥和模板文件都不进 Git。
+- 还没有 Android 工程。第 6 步是可选的自动打标签。
 - 还没有发过版，所以还没有面向用户的 `README.md`。第一次发版时再写，并附带 Windows 安装包。
-- 下一步以 `PROGRESS.md` 为准：等用户确认后再做第 5 步（入库脚本）。不要跳步。
-- CI（`.github/workflows/ci.yml`）在 pull request 和推送到 `main` 时跑：`npm ci`，再用 Node 检查 `scripts/` 里 TypeScript 的语法。不跑 `r2:check`、`supabase:check`、`download:check`，也不构建 `apps/web`，也不读 `.env`。
+- 下一步以 `PROGRESS.md` 为准：等用户确认后再做第 6 步。不要跳步。
+- CI（`.github/workflows/ci.yml`）在 pull request 和推送到 `main` 时跑：`npm ci`，再用 Node 检查 `scripts/` 里 TypeScript 的语法。不跑入库、不构建 `apps/web`，也不读 `.env`。
+- 入库脚本依赖本机的 `soffice`（LibreOffice）和 `pdftoppm`。CI 机器上没有它们，所以不在 CI 里跑入库。
 
 ## 交付
 
