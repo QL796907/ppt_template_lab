@@ -74,11 +74,14 @@
 
 ## 第 7 步：部署
 
-- 状态：还没上线。部署命令已经接上，缺一个 Vercel 令牌，所以网站还打不开。
+- 状态：还没上线。部署改到 Cloudflare Workers，缺一个新的账户 API 令牌，所以网站还打不开。
 - 做了什么：
-  - `npm run deploy:web` 会把 `apps/web` 部署到 Vercel 项目 `ppt-template-lab`
-  - 部署时把这 7 个变量写到托管平台，标成密钥，不写进 Git：`R2_ACCESS_KEY_ID`、`R2_SECRET_ACCESS_KEY`、`R2_BUCKET`、`R2_ENDPOINT`、`SUPABASE_URL`、`SUPABASE_SERVICE_ROLE_KEY`、`DOWNLOAD_SECRET`
+  - 网站可以继续用现有的 Cloudflare 账号。R2 桶还是原来的私有桶
+  - `npm run deploy:web` 会把 `apps/web` 部署到 Worker `ppt-template-lab`
+  - 填了 `WEB_DOMAIN` 时，会把这个域名绑到网站上。域名必须已经在同一个 Cloudflare 账号里
+  - 部署时把这 7 个变量写成 Worker 密钥，不写进 Git：`R2_ACCESS_KEY_ID`、`R2_SECRET_ACCESS_KEY`、`R2_BUCKET`、`R2_ENDPOINT`、`SUPABASE_URL`、`SUPABASE_SERVICE_ROLE_KEY`、`DOWNLOAD_SECRET`
   - 看图打标签的密钥只留在入库用的本机，不会放到网站上
-  - CI 在语法检查之外会构建网站。不读 `.env`，不上传模板
-- 你需要做的：到 https://vercel.com/account/tokens 建一个令牌，写进本机 `.env` 的 `VERCEL_TOKEN`。不要发到公开地方，也不要提交。
-- 下一步：有令牌后再跑部署，把打开网站的地址记在这里。
+  - 本机构建过 Cloudflare 版本，页面和下载接口都在
+  - CI 会构建网站的两个版本。不读 `.env`，不上传模板，也不部署
+- 你需要做的：到 https://dash.cloudflare.com/profile/api-tokens 新建令牌。用模板「编辑 Cloudflare Workers」，再给你的域名加上「区域 / DNS / 编辑」和「区域 / 区域 / 读取」。这不是再建一个 R2 对象存储令牌。写进本机 `.env` 的 `CLOUDFLARE_API_TOKEN`。域名写进 `WEB_DOMAIN`。不要发到公开地方，也不要提交。
+- 下一步：有令牌和域名后再跑部署，把打开网站的地址记在这里。
