@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { basename, extname, join, resolve } from "node:path";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { createR2Client } from "../apps/web/lib/download.ts";
+import { classifyPreview, mergeLabels } from "./classify.ts";
 
 const file = option("--file");
 const sourceNote = option("--source-note");
@@ -60,6 +61,10 @@ await client.send(
   }),
 );
 
+const auto =
+  theme && colorTone && tags.length > 0 ? null : await classifyPreview(preview);
+const labels = mergeLabels({ theme, colorTone, tags }, auto);
+
 const inserted = await fetch(`${required("SUPABASE_URL").replace(/\/$/, "")}/rest/v1/templates`, {
   method: "POST",
   headers: {
@@ -71,9 +76,9 @@ const inserted = await fetch(`${required("SUPABASE_URL").replace(/\/$/, "")}/res
   body: JSON.stringify({
     id,
     title,
-    tags,
-    theme: theme || null,
-    color_tone: colorTone || null,
+    tags: labels.tags,
+    theme: labels.theme,
+    color_tone: labels.colorTone,
     preview_key: previewKey,
     file_key: fileKey,
     source_note: sourceNote,
@@ -88,6 +93,11 @@ if (!inserted.ok) {
 
 console.log(`已入库：${title}`);
 console.log(`编号：${id}`);
+if (labels.theme || labels.colorTone || labels.tags.length > 0) {
+  console.log(
+    `标签：主题 ${labels.theme || "未填"}，色调 ${labels.colorTone || "未填"}，标签 ${labels.tags.join("、") || "未填"}`,
+  );
+}
 console.log("刷新 http://127.0.0.1:3000 就能看到。网站要先用 npm run web 开着。");
 
 function renderFirstSlide(pptxPath: string) {

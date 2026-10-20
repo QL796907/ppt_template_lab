@@ -4,10 +4,10 @@
 
 ## 当前状态
 
-- 第 0 步到第 5 步已完成。`npm run ingest` 把本地 `.pptx` 的第一页做成预览，上传到 R2 并写入 `templates`。必须带 `--source-note`。密钥和模板文件都不进 Git。
-- 还没有 Android 工程。第 6 步是可选的自动打标签。
+- 第 0 步到第 5 步已完成。第 6 步的打标签代码已接上入库：没有 `VISION_API_KEY` 或接口失败时仍会入库。还没用真实模型对预览图打出过标签。
+- 还没有 Android 工程。
 - 还没有发过版，所以还没有面向用户的 `README.md`。第一次发版时再写，并附带 Windows 安装包。
-- 下一步以 `PROGRESS.md` 为准：等用户确认后再做第 6 步。不要跳步。
+- 下一步以 `PROGRESS.md` 为准：等 `VISION_API_KEY` 到位后，再验收「对测试图打出合理标签」。不要跳到第 7 步。
 - CI（`.github/workflows/ci.yml`）在 pull request 和推送到 `main` 时跑：`npm ci`，再用 Node 检查 `scripts/` 里 TypeScript 的语法。不跑入库、不构建 `apps/web`，也不读 `.env`。
 - 入库脚本依赖本机的 `soffice`（LibreOffice）和 `pdftoppm`。CI 机器上没有它们，所以不在 CI 里跑入库。
 
