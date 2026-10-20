@@ -71,3 +71,14 @@
   - 用一个连不上的假接口跑过：目录里出现了一行，主题和标签是空的，然后把这行测试数据删掉了
 - 你的决定：接口密钥到时候自己填。填在本机 `.env` 的 `VISION_API_KEY`，可选 `VISION_API_BASE`、`VISION_MODEL`。
 - 下一步：第 7 步是部署。等你确认再做。第 6 步的真实看图，等你填好密钥后再入库一次就能验。
+
+## 第 7 步：部署
+
+- 状态：还没上线。部署命令已经接上，缺一个 Vercel 令牌，所以网站还打不开。
+- 做了什么：
+  - `npm run deploy:web` 会把 `apps/web` 部署到 Vercel 项目 `ppt-template-lab`
+  - 部署时把这 7 个变量写到托管平台，标成密钥，不写进 Git：`R2_ACCESS_KEY_ID`、`R2_SECRET_ACCESS_KEY`、`R2_BUCKET`、`R2_ENDPOINT`、`SUPABASE_URL`、`SUPABASE_SERVICE_ROLE_KEY`、`DOWNLOAD_SECRET`
+  - 看图打标签的密钥只留在入库用的本机，不会放到网站上
+  - CI 在语法检查之外会构建网站。不读 `.env`，不上传模板
+- 你需要做的：到 https://vercel.com/account/tokens 建一个令牌，写进本机 `.env` 的 `VERCEL_TOKEN`。不要发到公开地方，也不要提交。
+- 下一步：有令牌后再跑部署，把打开网站的地址记在这里。

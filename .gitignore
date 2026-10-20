@@ -13,6 +13,8 @@ previews/
 # 依赖和网站构建产物不要提交
 node_modules/
 .next/
+.vercel/
+.open-next/
 
 # 系统杂文件
 .DS_Store
