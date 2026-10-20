@@ -6,6 +6,7 @@ import { basename, extname, join, resolve } from "node:path";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { createR2Client } from "../apps/web/lib/download.ts";
 import { classifyPreview, mergeLabels } from "./classify.ts";
+import { composePreview } from "./preview.ts";
 
 const file = option("--file");
 const sourceNote = option("--source-note");
@@ -37,7 +38,8 @@ try {
 }
 
 const id = randomUUID();
-const preview = renderFirstSlide(path);
+const rendered = renderPreview(path);
+const preview = rendered.png;
 const pptx = readFileSync(path);
 const fileKey = `files/${id}.pptx`;
 const previewKey = `previews/${id}.png`;
@@ -93,6 +95,7 @@ if (!inserted.ok) {
 
 console.log(`已入库：${title}`);
 console.log(`编号：${id}`);
+console.log(`预览包含第 ${rendered.pages.join("、")} 页，其中第 ${rendered.titlePage} 页是标题页。`);
 if (labels.theme || labels.colorTone || labels.tags.length > 0) {
   console.log(
     `标签：主题 ${labels.theme || "未填"}，色调 ${labels.colorTone || "未填"}，标签 ${labels.tags.join("、") || "未填"}`,
@@ -100,7 +103,7 @@ if (labels.theme || labels.colorTone || labels.tags.length > 0) {
 }
 console.log("刷新 http://127.0.0.1:3000 就能看到。网站要先用 npm run web 开着。");
 
-function renderFirstSlide(pptxPath: string) {
+function renderPreview(pptxPath: string) {
   const soffice = commandPath("soffice") ?? commandPath("libreoffice");
   const pdftoppm = commandPath("pdftoppm");
   if (!soffice || !pdftoppm) {
@@ -130,17 +133,18 @@ function renderFirstSlide(pptxPath: string) {
       console.error((converted.stderr || converted.stdout || "").trim());
       process.exit(1);
     }
-    const pdf = join(dir, `${basename(pptxPath, extname(pptxPath))}.pdf`);
-    const pngBase = join(dir, "slide");
-    const rendered = spawnSync(pdftoppm, ["-png", "-f", "1", "-l", "1", "-singlefile", pdf, pngBase], {
-      encoding: "utf8",
-    });
-    if (rendered.status !== 0) {
-      console.error("生成预览失败。第一页没有变成 PNG。");
-      console.error((rendered.stderr || rendered.stdout || "").trim());
+    const pdfName = `${basename(pptxPath, extname(pptxPath))}.pdf`;
+    try {
+      const preview = composePreview(dir, pdfName, pptxPath);
+      if (preview.pages.length < 4) {
+        console.error(`这份文稿只有 ${preview.pages.length} 页，预览里放了全部页面。`);
+      }
+      return { png: readFileSync(preview.sheet), pages: preview.pages, titlePage: preview.titlePage };
+    } catch (error) {
+      console.error("生成预览失败。");
+      console.error(error instanceof Error ? error.message : error);
       process.exit(1);
     }
-    return readFileSync(`${pngBase}.png`);
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

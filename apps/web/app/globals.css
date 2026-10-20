@@ -85,9 +85,9 @@ button,
 .placeholder {
   display: block;
   width: 100%;
-  height: 160px;
-  object-fit: cover;
-  background: #ebe6dc;
+  height: 240px;
+  object-fit: contain;
+  background: #eceae6;
 }
 
 .placeholder {
