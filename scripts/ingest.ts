@@ -95,7 +95,11 @@ if (!inserted.ok) {
 
 console.log(`已入库：${title}`);
 console.log(`编号：${id}`);
-console.log(`预览包含第 ${rendered.pages.join("、")} 页，其中第 ${rendered.titlePage} 页是标题页。`);
+console.log(
+  rendered.pages.length >= 4
+    ? "预览拼了四页，其中包含标题页。"
+    : `预览放了全部 ${rendered.pages.length} 页，其中包含标题页。`,
+);
 if (labels.theme || labels.colorTone || labels.tags.length > 0) {
   console.log(
     `标签：主题 ${labels.theme || "未填"}，色调 ${labels.colorTone || "未填"}，标签 ${labels.tags.join("、") || "未填"}`,

@@ -7,7 +7,7 @@ function same(actual: number[], expected: number[], label: string) {
   }
 }
 
-same(choosePreviewSlides(6, 0), [0, 1, 4, 5], "六页");
+same(choosePreviewSlides(6, 0), [0, 1, 2, 3], "六页");
 same(choosePreviewSlides(4, 0), [0, 1, 2, 3], "四页");
 same(choosePreviewSlides(2, 0), [0, 1], "两页");
 const withLaterTitle = choosePreviewSlides(8, 3);

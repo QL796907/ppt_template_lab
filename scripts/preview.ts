@@ -7,8 +7,8 @@ export function choosePreviewSlides(count: number, titleIndex: number) {
   if (count <= 0) return [];
   const title = Math.min(Math.max(titleIndex, 0), count - 1);
   if (count <= 4) return Array.from({ length: count }, (_, index) => index);
-  const picked = [0, 1, count - 2, count - 1];
-  if (!picked.includes(title)) picked[1] = title;
+  const picked = [0, 1, 2, 3];
+  if (!picked.includes(title)) picked[3] = title;
   const unique = [...new Set(picked)];
   for (let index = 0; unique.length < 4 && index < count; index += 1) {
     if (!unique.includes(index)) unique.push(index);
@@ -38,9 +38,7 @@ export function composePreview(dir: string, pdfName: string, pptxPath: string) {
   if (!chosen.includes(titleIndex)) throw new Error("预览里没有标题页");
   const sheet = join(dir, "sheet.png");
   const args = [fileURLToPath(new URL("./preview_sheet.py", import.meta.url)), sheet];
-  for (const index of chosen) {
-    args.push(String(index + 1), join(dir, pages[index]));
-  }
+  for (const index of chosen) args.push(join(dir, pages[index]));
   const composed = spawnSync("python3", args, { encoding: "utf8" });
   if (composed.status !== 0) {
     throw new Error((composed.stderr || composed.stdout || "拼预览图失败").trim());
