@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", "PingFang SC", "Noto Sans SC", sans-serif;
+  background: #f4f1ea;
+  color: #221f1a;
+}
+
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 36px 20px 72px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 650;
+}
+
+.lead {
+  margin: 0 0 24px;
+  color: #5c564c;
+}
+
+form.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+
+input {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid #d9d2c5;
+  border-radius: 8px;
+  background: white;
+}
+
+button,
+.clear {
+  font: inherit;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 0;
+  background: #2f5d50;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.clear {
+  background: transparent;
+  color: #2f5d50;
+}
+
+.secret {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0 20px;
+  max-width: 360px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(40, 30, 10, 0.08);
+}
+
+.card img,
+.placeholder {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: #ebe6dc;
+}
+
+.placeholder {
+  display: grid;
+  place-items: center;
+  color: #7a7368;
+}
+
+.card div {
+  padding: 14px 14px 16px;
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.meta {
+  margin: 0 0 12px;
+  color: #5c564c;
+  font-size: 14px;
+}
+
+.message,
+.empty,
+.error {
+  margin: 12px 0;
+}
+
+.error {
+  color: #8d2f2f;
+}

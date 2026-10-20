@@ -4,11 +4,11 @@
 
 ## 当前状态
 
-- 第 0 步到第 3 步已完成。R2 能上传；Supabase 表 `templates` 能读写；下载接口会校验 `DOWNLOAD_SECRET`，再发 120 秒签名链接。密钥只在本机 `.env`。
-- 还没有网站页面，也没有 Android 工程。列表页是第 4 步。
+- 第 0 步到第 4 步已完成。列表页在 `apps/web`，`npm run web` 打开。预览和下载都走 120 秒签名链接。密钥只在本机 `.env`。
+- 还没有 Android 工程。入库脚本是第 5 步。
 - 还没有发过版，所以还没有面向用户的 `README.md`。第一次发版时再写，并附带 Windows 安装包。
-- 下一步以 `PROGRESS.md` 为准：等用户确认后再做第 4 步（列表页）。不要跳步。
-- CI（`.github/workflows/ci.yml`）在 pull request 和推送到 `main` 时跑：`npm ci`，再用 Node 检查 `scripts/` 里 TypeScript 的语法。不跑 `r2:check`、`supabase:check`、`download:check`，也不读 `.env`。
+- 下一步以 `PROGRESS.md` 为准：等用户确认后再做第 5 步（入库脚本）。不要跳步。
+- CI（`.github/workflows/ci.yml`）在 pull request 和推送到 `main` 时跑：`npm ci`，再用 Node 检查 `scripts/` 里 TypeScript 的语法。不跑 `r2:check`、`supabase:check`、`download:check`，也不构建 `apps/web`，也不读 `.env`。
 
 ## 交付
 
