@@ -9,11 +9,7 @@ export function choosePreviewSlides(count: number, titleIndex: number) {
   if (count <= 4) return Array.from({ length: count }, (_, index) => index);
   const picked = [0, 1, 2, 3];
   if (!picked.includes(title)) picked[3] = title;
-  const unique = [...new Set(picked)];
-  for (let index = 0; unique.length < 4 && index < count; index += 1) {
-    if (!unique.includes(index)) unique.push(index);
-  }
-  return unique.sort((left, right) => left - right);
+  return picked;
 }
 
 export function findTitleSlide(pptxPath: string) {
@@ -46,7 +42,6 @@ export function composePreview(dir: string, pdfName: string, pptxPath: string) {
   return {
     sheet,
     pages: chosen.map((index) => index + 1),
-    titlePage: titleIndex + 1,
   };
 }
 
