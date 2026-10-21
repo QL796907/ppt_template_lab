@@ -23,15 +23,9 @@ const accountId = (process.env.CLOUDFLARE_ACCOUNT_ID || process.env.R2_ACCOUNT_I
 const domain = (process.env.WEB_DOMAIN || "").trim().replace(/^https?:\/\//, "").replace(/\/.*$/, "");
 const missing = HOST_KEYS.filter((key) => !process.env[key]?.trim());
 
-if (!token || !accountId || missing.length > 0) {
+if (!accountId || missing.length > 0) {
   console.error("还不能部署：");
-  if (!token) {
-    console.error("  - CLOUDFLARE_API_TOKEN");
-    console.error("到 https://dash.cloudflare.com/profile/api-tokens 新建令牌。");
-    console.error("用模板「编辑 Cloudflare Workers」，再补上你的域名的「区域 / DNS / 编辑」和「区域 / 区域 / 读取」。");
-    console.error("这是账户 API 令牌，不是再建一个 R2 对象存储令牌。写进本机 .env，不要提交。");
-  }
-  if (!accountId) console.error("  - CLOUDFLARE_ACCOUNT_ID");
+  if (!accountId) console.error("  - R2_ACCOUNT_ID");
   for (const key of missing) console.error(`  - ${key}`);
   process.exit(1);
 }
@@ -60,7 +54,7 @@ function run(command: string, args: string[]) {
       cwd: webDir,
       env: {
         ...process.env,
-        CLOUDFLARE_API_TOKEN: token,
+        ...(token ? { CLOUDFLARE_API_TOKEN: token } : {}),
         CLOUDFLARE_ACCOUNT_ID: accountId,
         WEB_DOMAIN: domain,
       },

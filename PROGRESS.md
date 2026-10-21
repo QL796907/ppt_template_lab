@@ -83,5 +83,5 @@
   - 看图打标签的密钥只留在入库用的本机，不会放到网站上
   - 本机构建过 Cloudflare 版本，页面和下载接口都在
   - CI 会构建网站的两个版本。不读 `.env`，不上传模板，也不部署
-- 你需要做的：到 https://dash.cloudflare.com/profile/api-tokens 新建令牌。用模板「编辑 Cloudflare Workers」，再给你的域名加上「区域 / DNS / 编辑」和「区域 / 区域 / 读取」。这不是再建一个 R2 对象存储令牌。写进本机 `.env` 的 `CLOUDFLARE_API_TOKEN`。域名写进 `WEB_DOMAIN`。不要发到公开地方，也不要提交。
-- 下一步：有令牌和域名后再跑部署，把打开网站的地址记在这里。
+- 你需要做的：在自己的电脑上克隆仓库，把已有的 R2 钥匙、Supabase 钥匙和 `DOWNLOAD_SECRET` 写入本机 `.env`，再在 `apps/web` 里运行 `npx cf auth login` 用浏览器登录，然后在仓库根目录运行 `npm run deploy:web`。域名写入 `WEB_DOMAIN`。不用把账户 API 令牌发过来。
+- 下一步：你发布成功后，把打开网站的地址记在这里。

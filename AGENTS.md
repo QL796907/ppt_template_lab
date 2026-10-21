@@ -5,10 +5,10 @@
 ## 当前状态
 
 - 第 0 步到第 5 步已完成。入库预览是四页拼图，并包含标题页。第 6 步的打标签代码已接上：没有 `VISION_API_KEY` 或接口失败时仍会入库。用户会自己把密钥写进 `.env`，不要再向聊天索要看图密钥。真实看图还没验。
-- 第 7 步还没上线。网站改部署到 Cloudflare Workers，不再用 Vercel。`npm run deploy:web` 需要 `CLOUDFLARE_API_TOKEN`。账号 ID 用已有的 `R2_ACCOUNT_ID`。用户要绑自己的域名时，把主机名写进 `WEB_DOMAIN`，域名必须已经在同一个 Cloudflare 账号里。令牌写进 `.env` 之前不要假装网站已经能打开。看图密钥不要写到 Worker。
+- 第 7 步还没上线。网站部署到 Cloudflare Workers。用户在自己的电脑上用 `npx cf auth login` 登录后运行 `npm run deploy:web`，不必把账户 API 令牌发到聊天里。账号 ID 用 `R2_ACCOUNT_ID`。域名写进 `WEB_DOMAIN`，且必须已经在同一个 Cloudflare 账号里。还没拿到网址之前不要假装网站已经能打开。看图密钥不要写到 Worker。
 - 还没有 Android 工程。
 - 还没有发过版，所以还没有面向用户的 `README.md`。第一次发版时再写，并附带 Windows 安装包。网站部署不是这次发版。
-- 下一步以 `PROGRESS.md` 为准：拿到 `CLOUDFLARE_API_TOKEN` 和要绑定的域名后再部署。不要跳步。
+- 下一步以 `PROGRESS.md` 为准：等用户在自己的电脑上发布，再把网址记下来。不要跳步。
 - CI（`.github/workflows/ci.yml`）在 pull request 和推送到 `main` 时跑：`npm ci`，用 Node 检查 `scripts/` 里 TypeScript 的语法，再 `npm ci` 并构建 `apps/web` 的 Next 版本和 Cloudflare 版本。不跑入库，不部署，也不读 `.env`。
 - 入库脚本依赖本机的 `soffice`（LibreOffice）和 `pdftoppm`。CI 机器上没有它们，所以不在 CI 里跑入库。
 
