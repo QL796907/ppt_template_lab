@@ -10,9 +10,5 @@ function same(actual: number[], expected: number[], label: string) {
 same(choosePreviewSlides(6, 0), [0, 1, 2, 3], "六页");
 same(choosePreviewSlides(4, 0), [0, 1, 2, 3], "四页");
 same(choosePreviewSlides(2, 0), [0, 1], "两页");
-const withLaterTitle = choosePreviewSlides(8, 3);
-if (!withLaterTitle.includes(3) || withLaterTitle.length !== 4) {
-  console.error("标题页不在开头时，预览里也应该有它。");
-  process.exit(1);
-}
+same(choosePreviewSlides(8, 5), [0, 1, 2, 5], "标题在第四页之后");
 console.log("四页预览的选页是对的。");
