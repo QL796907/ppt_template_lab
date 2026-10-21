@@ -11,6 +11,7 @@
     "web": "npm run dev --prefix apps/web",
     "ingest": "node --disable-warning=ExperimentalWarning --experimental-strip-types --env-file-if-exists=.env scripts/ingest.ts",
     "classify:check": "node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/classify-check.ts",
+    "preview:check": "node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/preview-check.ts",
     "deploy:web": "node --disable-warning=ExperimentalWarning --experimental-strip-types --env-file-if-exists=.env scripts/deploy-web.ts"
   },
   "dependencies": {
