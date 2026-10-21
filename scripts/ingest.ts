@@ -143,7 +143,7 @@ function renderPreview(pptxPath: string) {
       if (preview.pages.length < 4) {
         console.error(`这份文稿只有 ${preview.pages.length} 页，预览里放了全部页面。`);
       }
-      return { png: readFileSync(preview.sheet), pages: preview.pages, titlePage: preview.titlePage };
+      return { png: readFileSync(preview.sheet), pages: preview.pages };
     } catch (error) {
       console.error("生成预览失败。");
       console.error(error instanceof Error ? error.message : error);
