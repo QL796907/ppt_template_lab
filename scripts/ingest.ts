@@ -3,8 +3,7 @@ import { randomUUID } from "node:crypto";
 import { mkdtempSync, readFileSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { basename, extname, join, resolve } from "node:path";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { createR2Client } from "../apps/web/lib/download.ts";
+import { createR2Client, PutObjectCommand } from "../apps/web/lib/download.ts";
 import { classifyPreview, mergeLabels } from "./classify.ts";
 import { composePreview } from "./preview.ts";
 

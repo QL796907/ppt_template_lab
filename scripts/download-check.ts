@@ -1,5 +1,5 @@
-import { GetObjectCommand } from "@aws-sdk/client-s3";
-import { createR2Client, DOWNLOAD_EXPIRES_SECONDS, startDownloadServer } from "./download-server.ts";
+import { createR2Client, DOWNLOAD_EXPIRES_SECONDS, GetObjectCommand } from "../apps/web/lib/download.ts";
+import { startDownloadServer } from "./download-server.ts";
 
 const base = process.env.SUPABASE_URL?.trim().replace(/\/$/, "");
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();

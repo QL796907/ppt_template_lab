@@ -1,4 +1,4 @@
-import { ListObjectsV2Command, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { createR2Client, ListObjectsV2Command, PutObjectCommand } from "../apps/web/lib/download.ts";
 
 const REQUIRED = [
   "R2_ACCESS_KEY_ID",
@@ -17,17 +17,8 @@ if (missing.length > 0) {
 }
 
 const bucket = process.env.R2_BUCKET!.trim();
-const endpoint = process.env.R2_ENDPOINT!.trim().replace(/\/$/, "");
 const key = "healthcheck/ping.txt";
-
-const client = new S3Client({
-  region: "auto",
-  endpoint,
-  credentials: {
-    accessKeyId: process.env.R2_ACCESS_KEY_ID!.trim(),
-    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!.trim(),
-  },
-});
+const client = createR2Client();
 
 const body = `r2 ok ${new Date().toISOString()}\n`;
 

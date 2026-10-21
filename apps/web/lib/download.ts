@@ -1,6 +1,8 @@
 import { timingSafeEqual } from "node:crypto";
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { GetObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+export { GetObjectCommand, ListObjectsV2Command, PutObjectCommand };
 
 export const DOWNLOAD_EXPIRES_SECONDS = 120;
 

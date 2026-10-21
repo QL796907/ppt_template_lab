@@ -11,6 +11,7 @@
 - 下一步以 `PROGRESS.md` 为准：等用户在自己的电脑上发布，再把网址记下来。不要跳步。
 - CI（`.github/workflows/ci.yml`）在 pull request 和推送到 `main` 时跑：`npm ci`，用 Node 检查 `scripts/` 里 TypeScript 的语法，再跑 `classify:check` 和 `preview:check`，然后 `npm ci` 并构建 `apps/web` 的 Next 版本和 Cloudflare 版本。不跑入库，不部署，也不读 `.env`。
 - 入库脚本依赖本机的 `soffice`（LibreOffice）和 `pdftoppm`。CI 机器上没有它们，所以不在 CI 里跑入库。
+- AWS SDK 只装在 `apps/web`。入库、下载检查和 R2 连通检查都从 `apps/web/lib/download.ts` 拿 `createR2Client` 和 S3 命令，同一个进程只加载这一份，并带上 R2 要的校验和设置。不要在仓库根目录再装一份 `@aws-sdk`。
 
 ## 交付
 
