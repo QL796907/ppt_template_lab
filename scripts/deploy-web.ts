@@ -105,9 +105,8 @@ async function saveSecrets() {
   }
 }
 
-await deploy();
-await saveSecrets();
 const deployed = await deploy();
+await saveSecrets();
 const output = `${deployed.stdout}\n${deployed.stderr}`;
 const found = output.match(/https:\/\/[^\s"'<>]+/g) ?? [];
 const urls = [...new Set(found.map((url) => url.replace(/[),.;]+$/, "")))];

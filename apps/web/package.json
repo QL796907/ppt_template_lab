@@ -8,8 +8,7 @@
     "start": "next start --port 3000",
     "dev:vinext": "vite dev --port 3001",
     "build:vinext": "vite build",
-    "start:vinext": "vite preview",
-    "deploy:vinext": "vinext-cloudflare deploy"
+    "start:vinext": "vite preview"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1148.0",
