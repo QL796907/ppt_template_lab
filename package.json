@@ -12,9 +12,5 @@
     "ingest": "node --disable-warning=ExperimentalWarning --experimental-strip-types --env-file-if-exists=.env scripts/ingest.ts",
     "classify:check": "node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/classify-check.ts",
     "deploy:web": "node --disable-warning=ExperimentalWarning --experimental-strip-types --env-file-if-exists=.env scripts/deploy-web.ts"
-  },
-  "dependencies": {
-    "@aws-sdk/client-s3": "^3.1148.0",
-    "@aws-sdk/s3-request-presigner": "^3.1153.0"
   }
 }

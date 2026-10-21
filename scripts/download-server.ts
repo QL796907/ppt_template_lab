@@ -2,8 +2,6 @@ import { createServer, type ServerResponse } from "node:http";
 import { pathToFileURL } from "node:url";
 import { handleDownload } from "../apps/web/lib/download.ts";
 
-export { createR2Client, DOWNLOAD_EXPIRES_SECONDS } from "../apps/web/lib/download.ts";
-
 const REQUIRED = [
   "R2_ACCESS_KEY_ID",
   "R2_SECRET_ACCESS_KEY",
