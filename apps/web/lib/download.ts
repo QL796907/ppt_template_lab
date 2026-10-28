@@ -89,15 +89,11 @@ export async function handleDownload(id: string, authorization: string | null) {
 async function signPreview(key: string | null) {
   const objectKey = key?.trim();
   if (!objectKey) return null;
-  try {
-    return await getSignedUrl(
-      createR2Client(),
-      new GetObjectCommand({ Bucket: required("R2_BUCKET"), Key: objectKey }),
-      { expiresIn: DOWNLOAD_EXPIRES_SECONDS },
-    );
-  } catch {
-    return null;
-  }
+  return getSignedUrl(
+    createR2Client(),
+    new GetObjectCommand({ Bucket: required("R2_BUCKET"), Key: objectKey }),
+    { expiresIn: DOWNLOAD_EXPIRES_SECONDS },
+  );
 }
 
 function authorized(authorization: string | null) {
