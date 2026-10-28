@@ -108,8 +108,8 @@
 
 ### 第 7 步：部署
 
-- Web 部署到 Vercel / Cloudflare Pages 等
-- 环境变量在托管平台配置
+- 网站用 `scripts/deploy-web.ts` 部署到 Cloudflare Workers。先在 `apps/web` 里运行 `npx cf auth login` 用浏览器登录，再在仓库根目录运行 `npm run deploy:web`。脚本会把本机 `.env` 里的 R2、Supabase 和下载密钥写成 Worker 密钥
+- 只有开不了浏览器时，才把账户 API 令牌写进本机 `.env` 的 `CLOUDFLARE_API_TOKEN`。不要把令牌发到聊天里，也不要提交
 - GitHub Actions 可选：仅跑 lint/test，不要在 CI 里放真实密钥上传模板
 
 ## 和开发 bot / 云端协作

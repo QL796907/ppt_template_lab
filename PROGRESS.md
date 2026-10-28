@@ -74,7 +74,7 @@
 
 ## 第 7 步：部署
 
-- 状态：还没上线。部署改到 Cloudflare Workers，缺一个新的账户 API 令牌，所以网站还打不开。
+- 状态：还没上线。用 `scripts/deploy-web.ts` 部署到 Cloudflare Workers：在自己的电脑上，先在 `apps/web` 里运行 `npx cf auth login`，再在仓库根目录运行 `npm run deploy:web`。只有开不了浏览器时才填 `CLOUDFLARE_API_TOKEN`。还没拿到网址，网站还打不开。
 - 做了什么：
   - 网站可以继续用现有的 Cloudflare 账号。R2 桶还是原来的私有桶
   - `npm run deploy:web` 会把 `apps/web` 部署到 Worker `ppt-template-lab`
