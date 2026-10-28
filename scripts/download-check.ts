@@ -33,7 +33,6 @@ const object = await client.send(
 const expected = Buffer.from(await object.Body!.transformToByteArray());
 
 const server = await startDownloadServer(0);
-const endpoint = process.env.R2_ENDPOINT!.trim().replace(/\/$/, "");
 const bucket = process.env.R2_BUCKET!.trim();
 try {
   const path = `/api/templates/${template.id}/download`;
@@ -71,9 +70,10 @@ try {
   console.log("带密钥拿到的链接：能下载，120 秒内有效。");
 
   signed.search = "";
+  // S3 API 主机始终要 SigV4。公开访问走 r2.dev 或自定义域名，
+  // 对 endpoint 发不签名的 GET 无论桶是否公开都会失败，不能当私有证明。
   const guessedUrls = [
     signed.toString(),
-    `${endpoint}/${bucket}/${template.file_key}`,
     `https://${bucket}.r2.dev/${template.file_key}`,
   ];
   for (const url of guessedUrls) {
