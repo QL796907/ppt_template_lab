@@ -31,7 +31,7 @@ export async function classifyPreview(png: Buffer): Promise<Labels | null> {
               {
                 type: "text",
                 text: [
-                  "你在给一份 PPT 模板的第一页预览图分类。",
+                  "你在给一份 PPT 模板的预览图分类。这张图是最多四页、含标题页的拼图。",
                   "只根据图里看得到的内容，用中文返回一个 JSON 对象，不要写解释。",
                   '{"theme":"2到6个字","color_tone":"浅色或深色或暖色或冷色","tags":["标签1","标签2"]}',
                   "theme 例如：商务、教学、节日、科技、简约。",

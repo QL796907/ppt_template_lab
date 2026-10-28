@@ -56,7 +56,7 @@
   - `npm run ingest -- --file 模板.pptx --source-note "许可已自查：个人使用"`
   - 可选 `--title`、`--theme`、`--color-tone`、`--tags`
   - 没有来源说明会停下来，不上传
-  - 用 LibreOffice 把第一页画成 PNG，pptx 和预览分别上传到私有桶，再写入 `templates`
+  - 用 LibreOffice 把最多四页、含标题页的拼图画成 PNG，pptx 和预览分别上传到私有桶，再写入 `templates`
   - 预览图是四页拼图，不标页码。多出来的页里任取四页，并保证里面有标题页。不足四页就放全部页面。
 - `.pptx` 和预览图没有提交
 

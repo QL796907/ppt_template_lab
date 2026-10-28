@@ -25,7 +25,7 @@
 - 后端 API：同仓库的 Route Handlers / 小服务
 - 对象存储：Cloudflare R2（S3 兼容）
 - 数据库：Supabase
-- 预览图：上传或入库时用脚本从 `.pptx` 渲第一页 PNG（可用 LibreOffice/`pptx2png` 等，选环境里好装的）
+- 预览图：上传或入库时用脚本从 `.pptx` 渲一张最多四页、含标题页的拼图 PNG（可用 LibreOffice/`pptx2png` 等，选环境里好装的）
 - 语言：TypeScript 优先；若用户强烈只要 Python，可用 FastAPI + 简单前端，但要说明取舍
 
 ## 你如何带用户

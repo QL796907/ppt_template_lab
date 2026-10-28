@@ -29,7 +29,7 @@ export function composePreview(dir: string, pdfName: string, pptxPath: string) {
     encoding: "utf8",
   });
   if (rendered.status !== 0) {
-    throw new Error((rendered.stderr || rendered.stdout || "第一页没有变成图片").trim());
+    throw new Error((rendered.stderr || rendered.stdout || "最多四页、含标题页的拼图没有变成图片").trim());
   }
   const pages = readdirSync(dir)
     .filter((name) => /^slide-\d+\.png$/.test(name))
