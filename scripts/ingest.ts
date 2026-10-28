@@ -37,7 +37,12 @@ try {
 }
 
 const id = randomUUID();
-const rendered = renderPreview(path);
+let rendered;
+try {
+  rendered = renderPreview(path);
+} catch {
+  process.exit(1);
+}
 const preview = rendered.png;
 const pptx = readFileSync(path);
 const fileKey = `files/${id}.pptx`;
@@ -134,7 +139,7 @@ function renderPreview(pptxPath: string) {
     if (converted.status !== 0) {
       console.error("生成预览失败。LibreOffice 没有把这份文稿转成图片。");
       console.error((converted.stderr || converted.stdout || "").trim());
-      process.exit(1);
+      throw new Error("LibreOffice 没有把这份文稿转成图片。");
     }
     const pdfName = `${basename(pptxPath, extname(pptxPath))}.pdf`;
     try {
@@ -146,7 +151,7 @@ function renderPreview(pptxPath: string) {
     } catch (error) {
       console.error("生成预览失败。");
       console.error(error instanceof Error ? error.message : error);
-      process.exit(1);
+      throw error;
     }
   } finally {
     rmSync(dir, { recursive: true, force: true });
