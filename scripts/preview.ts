@@ -12,10 +12,16 @@ export function choosePreviewSlides(count: number, titleIndex: number) {
   return picked;
 }
 
+export function titleSlideIndex(status: number | null, stdout: string, detail = "") {
+  const text = stdout.trim();
+  if (status === 0 && /^\d+$/.test(text)) return Number(text);
+  const reason = detail.trim();
+  throw new Error(reason ? `没有读出标题页。\n${reason}` : "没有读出标题页。");
+}
+
 export function findTitleSlide(pptxPath: string) {
   const result = spawnSync("python3", ["-c", TITLE_SCRIPT, pptxPath], { encoding: "utf8" });
-  const index = Number.parseInt(result.stdout.trim(), 10);
-  return Number.isInteger(index) && index >= 0 ? index : 0;
+  return titleSlideIndex(result.status, result.stdout ?? "", result.stderr || result.error?.message || "");
 }
 
 export function composePreview(dir: string, pdfName: string, pptxPath: string) {
